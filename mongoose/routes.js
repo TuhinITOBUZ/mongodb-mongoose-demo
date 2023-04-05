@@ -12,9 +12,23 @@ app.post("/add_user", async (request, response) => {
   }
 });
 
+app.put("/find_user", async (request, response) => {
+  try {
+    const doc = await userModel.findOneAndUpdate(
+      { name: 'Ram' },
+      {
+        name: "Wasif",
+        age: 20,
+      })
+    console.log(doc)
+    // response.send(user);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+})
+
 app.get("/users", async (request, response) => {
   const users = await userModel.find({});
-
   try {
     response.send(users);
   } catch (error) {
